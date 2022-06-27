@@ -10,10 +10,10 @@
 		<div class="app-header-contents">
       <h1>- おみくじアプリ -</h1>
       <h2>今日のあなたの運勢は・・・</h2>
-      <button class="start-button" type="button">
+      <button class="start-button js-fortune-start" type="button">
         運勢を占う！
       </button>
-      <button class="restart-button" type="button">
+      <button class="start-button re-start" type="button">
         もう一度占う！
       </button>
     </div>
@@ -39,6 +39,19 @@
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="app.js"></script>
+    <script>
+      $(function () {
+        $('.js-fortune-start').click(function () {
+            $(".re-start").toggleClass("re-start");
+            $(".js-fortune-start").toggleClass("re-start");
+            $(".result").fadeIn(1000);
+         });
+        $('.re-start').click(function () {
+            $(".js-fortune-start").toggleClass("re-start");
+            $(this).toggleClass("re-start");
+            $(".result").hide(0);
+        });
+      });
+    </script>
 	</body>
 </html>
