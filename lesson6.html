@@ -13,9 +13,6 @@
       <button class="start-button js-fortune-start" type="button">
         運勢を占う！
       </button>
-      <button class="start-button re-start" type="button">
-        もう一度占う！
-      </button>
     </div>
     <div class="result">
       <div class="row">
@@ -42,16 +39,38 @@
     <script>
       $(function () {
         $('.js-fortune-start').click(function () {
-            $(".re-start").toggleClass("re-start");
-            $(".js-fortune-start").toggleClass("re-start");
-            $(".result").fadeIn(1000);
-         });
-        $('.re-start').click(function () {
-            $(".js-fortune-start").toggleClass("re-start");
-            $(this).toggleClass("re-start");
-            $(".result").hide(0);
-        });
-      });
+          fortuneResults = {
+            money: [
+              { stars: "★★★",detail:"最高の金運です！いつの間にかお金が溜まっているかも・・・？"},
+              { stars: "★★",detail:"まずまず金運です！使いすぎには注意しましょう！"},
+              { stars: "★",detail:"悪い傾向が見られます！財布の紐は絞めておくと吉です！"}
+            ],
+            work: [
+              { stars: "★★★",detail:"最高の仕事運です！いつも以上にチャンスが巡ってくるかも・・・？"},
+              { stars: "★★",detail:"まずまず仕事運です！普段通り仕事が進むでしょう！"},
+              { stars: "★",detail:"悪い傾向が見られます！自信過剰にならないように注意しましょう"}
+            ],
+            health: [
+              { stars: "★★★",detail:"最高の健康運です！ランニングの距離を伸ばしても良いですね！"},
+              { stars: "★★",detail:"まずまず健康運です！無理せず体を動かしましょう！"},
+              { stars: "★",detail: "悪い傾向が見られます！ケガにご注意を・・・"}
+            ],
+          }
+          for(let r_title in fortuneResults){
+            let num = Math.floor( Math.random() * 3 )
+            let r_star = fortuneResults[r_title][num].stars
+            let r_detail = fortuneResults[r_title][num].detail
+            $('.' + r_title + ' .stars').text(r_star);
+            $('.' + r_title + ' .detail').text(r_detail);
+          }
+          $(".result").toggleClass("result-ext");
+          if ($(".result").hasClass("result-ext")) {
+            $(".js-fortune-start").text('もう一度占う！')
+          } else {
+            $(this).text('運勢を占う！')
+          }
+        })
+     });
     </script>
 	</body>
 </html>
